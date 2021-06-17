@@ -1,0 +1,8 @@
+voltronic-cli/bin/skymax.bak
+voltronic-cli/bin/skymax
+voltronic-cli/test/
+CMakeFiles
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+.DS_Store
