@@ -1,6 +1,6 @@
-# AxpertPi
+# Axpert Home Assistant
 
-An easy to use script to install https://github.com/ned-kelly/docker-voltronic-homeassistant.
+An easy to use script to install Axpert Home Assistant
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ psk="mypassword"
 
 5. SSH into your pi and run the following command:
 ```
-curl -s https://raw.githubusercontent.com/BionicWeb/AxpertPi/master/axpertpi.sh?$(date +%s) | sudo bash
+curl -s https://raw.githubusercontent.com/ParagonIntegrations/axpert_homeassistant/master/install.sh?$(date +%s) | sudo bash
 ```
 
 6. If you have a different inverter than the Axpert King 5KW, set the configuration files in the `config/` directory:
