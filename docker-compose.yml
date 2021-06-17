@@ -1,33 +1,43 @@
 version: '3'
 
 services:
+
+  # MQTT container
+  mqtt:
+    image: eclipse-mosquitto
+    container_name: mqtt
+    restart: always
+    ports:
+      - 1883:1883
+
+    # Homeassistant container
+    homeassistant:
+      container_name: home-assistant
+      image: homeassistant/raspberrypi3-homeassistant:stable
+      volumes:
+        - /home/pi/homeassistant:/config
+      environment:
+        - TZ=Africa/Johannesburg
+      restart: always
+      network_mode: host
+
+  # Voltronic container
   voltronic-mqtt:
-
-    # We're now (finally) supporting Multi-Arch builds (via Github actions) on Docker Hub!
+    container_name: voltronic-mqtt
     image: bushrangers/ha-voltronic-mqtt
-
     # Uncomment if you want to build your own local version.
     build:
       context: .
       dockerfile: Dockerfile.dev
-
-
-    container_name: voltronic-mqtt
-
-    privileged: true
+      privileged: true
     restart: always
-
     volumes:
         - ./config/:/etc/inverter/
-
     devices:
-    #  - "/dev/mem:/dev/mem"
-
     # USB Port Mapping
       - /dev/bus/usb:/dev/bus/usb:rwm
       - /dev/ttyUSB0:/dev/ttyUSB0:rwm
       - /dev/ttyUSB1:/dev/ttyUSB1:rwm
-
     # Serial Port Mapping...
       - /dev/ttyS0:/dev/ttyS0
       - /dev/ttyS1:/dev/ttyS1

@@ -1,4 +1,41 @@
-# You will need to merge with your own Home Assistant configuration.yml file...
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+mqtt:
+  broker: localhost
+  discovery: true
+  discovery_prefix: homeassistant
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+scene: !include scenes.yaml
+
+sensor:
+  - platform: integration
+    source: sensor.voltronic_load_watt
+    name: energy_spent
+    unit_prefix: k
+    round: 2
+
+  - platform: integration
+    source: sensor.voltronic_pv_in_watts
+    name: energy_produced
+    unit_prefix: k
+    round: 2
+
+utility_meter:
+  energy:
+    source: sensor.energy_spent
+    cycle: daily
+  solar:
+    source: sensor.energy_produced
+    cycle: daily
 
 input_select:
   solar_output_source_priority:
@@ -37,7 +74,6 @@ automation:
         {% elif is_state("input_select.solar_output_source_priority", "POP02 (SBU)") %}
           POP02
         {% endif %}
-
 - id: 'set_solar_charge_priority'
   alias: Stolar Trigger Charge Priority Change
   trigger:
@@ -57,7 +93,6 @@ automation:
         {% elif is_state("input_select.solar_charger_priority", "PCP03 (Solar only)") %}
           PCP03
         {% endif %}
-
 # Auto Switch to 'Solar based charging ONLY at sunrise' (will not charge batteries from the Grid to save power...)
 - id: 'switch_solar_only_charging_am'
   alias: Auto switch to "Solar Only" charging at Sunrise
@@ -80,7 +115,7 @@ automation:
   # Running on UPS mode seems to fuck up the 8 port tplink switch (it drops out from time to time) so it's best that we change mode after 2AM when less people are using Plex etc...
   alias: Switch to battery preferred output late evenings
   trigger:
-    - at: '02:00'
+    - at: '00:00'
       platform: time
   condition: []
   action:

@@ -46,11 +46,10 @@ $SUDO usermod -a -G docker pi
 $SUDO exec sg docker newgrp `id -gn`
 
 cd /home/pi
-git clone https://github.com/BionicWeb/AxpertPi.git
-cd /home/pi/AxpertPi
+git clone https://github.com/ParagonIntegrations/axpert_homeassistant.git
+cd /home/pi/axpert_homeassistant
 
 $SUDO mkdir /home/pi/homeassistant
-$SUDO cp -avr www /home/pi/homeassistant
 $SUDO cp -avr homeassistant /home/pi/
 
 cd /home/pi/homeassistant
