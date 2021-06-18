@@ -29,7 +29,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.dev
-      privileged: true
+    privileged: true
     restart: always
     volumes:
         - ./config/:/etc/inverter/
