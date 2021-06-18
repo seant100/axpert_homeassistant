@@ -58,4 +58,4 @@ $SUDO rm /home/pi/homeassistant/.storage/core.restore_state
 
 cd /home/pi/axpert_homeassistant
 
-docker-compose up -d
+# docker-compose up -d
