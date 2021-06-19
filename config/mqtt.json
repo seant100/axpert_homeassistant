@@ -7,7 +7,7 @@
     "password": "",
     "influx": {
         "enabled": "false",
-        "host": "http://[INFLUX_IP_OR_URL]:8086",
+        "host": "http://localhost:8086",
         "username": "",
         "password": "",
         "device": "voltronic",
