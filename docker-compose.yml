@@ -19,7 +19,7 @@ services:
     container_name: home-assistant
     image: homeassistant/raspberrypi3-homeassistant:${HOMEASSISTANT_VERSION}
     volumes:
-      - /home/pi/homeassistant:/config
+      - ./volumes/homeassistant:/config
     environment:
       - TZ=Africa/Johannesburg
     restart: always
