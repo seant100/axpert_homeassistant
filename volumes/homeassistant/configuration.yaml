@@ -91,11 +91,11 @@ automation:
     data_template:
       topic: 'homeassistant/sensor/voltronic'
       payload: >
-        {% if is_state("input_select.solar_output_source_priority", "POPLG00 (Automatic)") %}
+        {% if is_state("input_select.inverter_operation_logic", "POPLG00 (Automatic)") %}
           POPLG00
-        {% elif is_state("input_select.solar_output_source_priority", "POPLG01 (On-Line)") %}
+        {% elif is_state("input_select.inverter_operation_logic", "POPLG01 (On-Line)") %}
           POPLG01
-        {% elif is_state("input_select.solar_output_source_priority", "POPLG02 (Passthrough)") %}
+        {% elif is_state("input_select.inverter_operation_logic", "POPLG02 (Passthrough)") %}
           POPLG02
         {% endif %}
 - id: 'set_solar_charge_priority'
