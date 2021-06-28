@@ -34,7 +34,7 @@ services:
     #  - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
     #  - GF_SECURITY_ALLOW_EMBEDDING=true
 
-  # Infulx DB container
+  # Influx DB container
   influxdb:
     image: influxdb:${INFLUXDB_VERSION}
     restart: always
