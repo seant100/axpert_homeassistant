@@ -14,16 +14,57 @@ services:
       - ./volumes/mqtt/data:/mosquitto/data
       - ./volumes/mqtt/log:/mosquitto/log
 
+  # Grafana container
+  grafana:
+    image: grafana/grafana:${GRAFANA_VERSION}
+    restart: always
+    depends_on:
+      influxdb:
+        condition: service_healthy
+    volumes:
+      - ./volumes/grafana/data:/var/lib/grafana
+      - ./volumes/grafana/conf:/etc/grafana
+      - ./volumes/grafana/logs:/var/log/grafana
+    ports:
+      - 3000:3000
+    # uncomment this if you want to allow anonymous access to Grafana for embedding (e.g. in Home Assistant dashboards)
+    #environment:
+    #  - GF_AUTH_DISABLE_LOGIN_FORM=true
+    #  - GF_AUTH_ANONYMOUS_ENABLED=true
+    #  - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
+    #  - GF_SECURITY_ALLOW_EMBEDDING=true
+
+  # Infulx DB container
+  influxdb:
+    image: influxdb:${INFLUXDB_VERSION}
+    restart: always
+    volumes:
+      - ./volumes/influxdb/data:/var/lib/influxdb
+    healthcheck:
+      test: ["CMD", "curl", "-sI", "http://127.0.0.1:8086/ping"]
+      interval: 30s
+      timeout: 1s
+      retries: 24
+    ports:
+      - 8086:8086
+
   # Homeassistant container
   homeassistant:
     container_name: home-assistant
     image: homeassistant/raspberrypi3-homeassistant:${HOMEASSISTANT_VERSION}
     volumes:
       - ./volumes/homeassistant:/config
+      - /etc/localtime:/etc/localtime:ro
+      #- /dev/serial/by-id/:/dev/serial/by-id/
     environment:
       - TZ=Africa/Johannesburg
     restart: always
     network_mode: host
+    depends_on:
+      influxdb:
+        condition: service_healthy
+      mqtt:
+        condition: service_started
 
   # Voltronic container
   voltronic-mqtt:
