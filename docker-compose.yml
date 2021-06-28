@@ -4,16 +4,20 @@ services:
 
   # MQTT container
   mqtt:
-    image: eclipse-mosquitto
+    image: eclipse-mosquitto:${MQTT_VERSION}
     container_name: mqtt
     restart: always
     ports:
       - 1883:1883
+    volumes:
+      - ./volumes/mqtt/config:/mosquitto/config
+      - ./volumes/mqtt/data:/mosquitto/data
+      - ./volumes/mqtt/log:/mosquitto/log
 
   # Homeassistant container
   homeassistant:
     container_name: home-assistant
-    image: homeassistant/raspberrypi3-homeassistant:stable
+    image: homeassistant/raspberrypi3-homeassistant:${HOMEASSISTANT_VERSION}
     volumes:
       - /home/pi/homeassistant:/config
     environment:
@@ -24,15 +28,15 @@ services:
   # Voltronic container
   voltronic-mqtt:
     container_name: voltronic-mqtt
-    image: bushrangers/ha-voltronic-mqtt
+    image: bushrangers/ha-voltronic-mqtt:${VOLTRONIC_VERSION}
     # Uncomment if you want to build your own local version.
-    build:
-      context: .
-      dockerfile: Dockerfile.dev
+    #build:
+      #context: .
+      #dockerfile: Dockerfile.dev
     privileged: true
     restart: always
     volumes:
-        - ./config/:/etc/inverter/
+        - ./volumes/voltronic/config/:/etc/inverter/
     devices:
     # USB Port Mapping
       - /dev/bus/usb:/dev/bus/usb:rwm
