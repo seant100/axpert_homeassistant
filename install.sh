@@ -47,14 +47,10 @@ $SUDO exec sg docker newgrp `id -gn`
 
 cd /home/pi
 git clone https://github.com/ParagonIntegrations/axpert_homeassistant.git
-cd /home/pi/axpert_homeassistant
 
-$SUDO mkdir /home/pi/homeassistant
-$SUDO cp -avr homeassistant /home/pi/
-
-cd /home/pi/homeassistant
+cd /home/pi/axpert_homeassistant/volumes/homeassistant
 tar -xzvf storage.tar.gz
-$SUDO rm /home/pi/homeassistant/.storage/core.restore_state
+$SUDO rm /home/pi/axpert_homeassistant/volumes/homeassistant/.storage/core.restore_state
 
 cd /home/pi/axpert_homeassistant
 
