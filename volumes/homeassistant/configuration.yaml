@@ -11,6 +11,15 @@ mqtt:
   discovery: true
   discovery_prefix: homeassistant
 
+influxdb:
+  host: localhost
+  port: 8086
+  database: homeassistant
+  username: !secret influxdb_user
+  password: !secret influxdb_password
+  max_retries: 3
+  measurement_attr: entity_id
+
 group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
