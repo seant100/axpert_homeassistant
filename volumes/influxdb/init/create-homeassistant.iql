@@ -1,0 +1,3 @@
+CREATE DATABASE homeassistant WITH DURATION 31d
+CREATE USER homeassistant WITH PASSWORD 'TestPassword1234'
+GRANT WRITE ON homeassistant to homeassistant

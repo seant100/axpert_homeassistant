@@ -43,6 +43,7 @@ services:
     restart: always
     volumes:
       - ./volumes/influxdb/data:/var/lib/influxdb
+      - ./volumes/influxdb/init:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "curl", "-sI", "http://127.0.0.1:8086/ping"]
       interval: 30s
