@@ -49,9 +49,9 @@ cd /home/pi
 git clone https://github.com/ParagonIntegrations/axpert_homeassistant.git
 
 cd /home/pi/axpert_homeassistant/volumes/homeassistant
-tar -xzvf storage.tar.gz
-$SUDO rm /home/pi/axpert_homeassistant/volumes/homeassistant/.storage/core.restore_state
+#tar -xzvf storage.tar.gz
+#$SUDO rm /home/pi/axpert_homeassistant/volumes/homeassistant/.storage/core.restore_state
 
 cd /home/pi/axpert_homeassistant
-
+$SUDO git checkout develop
 # docker-compose up -d
