@@ -38,7 +38,7 @@ services:
 
   # Influx DB container
   influxdb:
-    container_name: influx db
+    container_name: influxdb
     image: influxdb:${INFLUXDB_VERSION}
     restart: always
     volumes:
