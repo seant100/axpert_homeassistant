@@ -4,8 +4,8 @@ services:
 
   # MQTT container
   mqtt:
-    image: eclipse-mosquitto:${MQTT_VERSION}
     container_name: mqtt
+    image: eclipse-mosquitto:${MQTT_VERSION}
     restart: always
     ports:
       - 1883:1883
@@ -16,6 +16,7 @@ services:
 
   # Grafana container
   grafana:
+    container_name: grafana
     image: grafana/grafana:${GRAFANA_VERSION}
     restart: always
     user: ${PUID}:${PGID}
@@ -37,6 +38,7 @@ services:
 
   # Influx DB container
   influxdb:
+    container_name: influx db
     image: influxdb:${INFLUXDB_VERSION}
     restart: always
     volumes:
