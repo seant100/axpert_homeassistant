@@ -24,8 +24,8 @@ services:
         condition: service_healthy
     volumes:
       - ./volumes/grafana/data:/var/lib/grafana
-      - ./volumes/grafana/conf:/etc/grafana
-      - ./volumes/grafana/logs:/var/log/grafana
+      #- ./volumes/grafana/conf:/etc/grafana
+      #- ./volumes/grafana/logs:/var/log/grafana
     ports:
       - 3000:3000
     # uncomment this if you want to allow anonymous access to Grafana for embedding (e.g. in Home Assistant dashboards)
