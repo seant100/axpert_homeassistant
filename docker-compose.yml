@@ -81,6 +81,9 @@ services:
       #dockerfile: Dockerfile.dev
     privileged: true
     restart: always
+    depends_on:
+      mqtt:
+        condition: service_started
     volumes:
         - ./volumes/voltronic/config/:/etc/inverter/
     devices:
