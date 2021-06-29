@@ -18,6 +18,7 @@ services:
   grafana:
     image: grafana/grafana:${GRAFANA_VERSION}
     restart: always
+    user: ${PUID}:${PGID}
     depends_on:
       influxdb:
         condition: service_healthy
@@ -58,6 +59,8 @@ services:
       #- /dev/serial/by-id/:/dev/serial/by-id/
     environment:
       - TZ=Africa/Johannesburg
+      - PUID=${PUID}
+      - PGID=${PGID}
     restart: always
     network_mode: host
     depends_on:
